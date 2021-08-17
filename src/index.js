@@ -19,6 +19,18 @@ console.log(refs.getInput);
 //     }, 500
 // );
 
+// function aaaa() {
+//       _.debounce(() => {
+//     console.log(
+//       'Input event handler invocation after 300ms of inactivity past burst.',
+//     );
+//   }, 300)
+// }
+
+// aaaa();
+
+// console.log(aaaa());
+
 refs.getInput.addEventListener('input', onInput);
 function onInput(event) {
     event.preventDefault();
@@ -29,9 +41,11 @@ function onInput(event) {
     console.log(searchQuery);
 
     API.fetchCountries(searchQuery)
-        .then(a =>
+        .then(countries =>
         {
-            console.log(a);
+            countries.map(countre => { console.log(countre.name); });
+            
             });
     
 }
+
