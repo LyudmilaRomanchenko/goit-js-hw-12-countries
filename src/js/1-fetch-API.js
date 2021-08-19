@@ -6,6 +6,9 @@ console.log(countriesList);
 import API from './fetchCountries';
 console.log(API);
 
+import debounce from 'lodash.debounce';
+
+
 const refs = {
     getInput: document.querySelector('.input'),
     getCountriesList: document.querySelector('.countries-list'),
@@ -13,7 +16,7 @@ const refs = {
 
 console.log(refs.getInput);
 
-refs.getInput.addEventListener('input', onInput);
+refs.getInput.addEventListener('input',  debounce(onInput, 5000));
 
 function onInput(event) {
     event.preventDefault();
@@ -40,11 +43,11 @@ function handlUserQuery(countries) {
 
     if (arrayLength === 1) {
       
-        renderCountreMarkUP(countries);
+        renderCountryMarkUP(countries);
     };
 
     if (arrayLength > 10) {
-        console.log('>10 countre');
+        console.log('>10 countres');
     };
             
             
@@ -63,26 +66,14 @@ function renderCountriesList(countries) {
     });
 };
 
-function renderCountreMarkUP(countries) {
-    // const markUp = countre(countries);
-    // refs.getCountriesList.innerHTML = markUp;
+function renderCountryMarkUP(countries) {
+    const markUp = countre(countries);
+    refs.getCountriesList.innerHTML = markUp;
 
     
 
     //=========
-    console.log('one countre');
-    console.log(countries.name);
-
-    // countries.map(countre => {
-    //     console.log(countre.name);
-    //     name = countre.name;
-    //     console.log(name);
-        
-        
-    // });
-    let name = 22222222;
-    const markUp = countre(name);
-    refs.getCountriesList.innerHTML = markUp;
+    console.log('one country');
     
 }
 
@@ -92,7 +83,7 @@ function renderCountreMarkUP(countries) {
 //======================
 // _.debounce(
 //     () => {
-//         console.log('hhhhhhhhhh');
+//         console.log('debounce');
 //     }, 500
 // );
 
