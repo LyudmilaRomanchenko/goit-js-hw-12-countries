@@ -45,9 +45,10 @@ function onInput(event) {
 function handlUserQuery(countries) {
     const arrayLength = [...countries].length;
 
+    refs.getCountriesList.innerHTML = '';
+
     if (arrayLength > 10) {
         console.log('>10 countres');
-        //refs.getCountriesList.text('ffff');
         renderNotify();
     }
 
