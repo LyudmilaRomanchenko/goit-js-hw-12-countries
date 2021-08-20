@@ -6,7 +6,14 @@ console.log(countriesList);
 import API from './fetchCountries';
 console.log(API);
 
+//Импортируем библиотеку lodash
 import debounce from 'lodash.debounce';
+
+//Импортируем плагин уведомлений pnotify
+import { alert, defaultModules } from '@pnotify/core';
+import '@pnotify/core/dist/PNotify.css';
+import * as PNotifyMobile from '@pnotify/mobile';
+import '@pnotify/mobile/dist/PNotifyMobile.css';
 
 
 const refs = {
@@ -16,7 +23,7 @@ const refs = {
 
 console.log(refs.getInput);
 
-refs.getInput.addEventListener('input',  debounce(onInput, 5000));
+refs.getInput.addEventListener('input',  debounce(onInput, 500));
 
 function onInput(event) {
     event.preventDefault();
@@ -31,50 +38,51 @@ function onInput(event) {
     }
 
     API.fetchCountries(searchQuery)
-        .then(handlUserQuery);
-    
+        .then(handlUserQuery)
+        .catch(onFetchQuery); 
 };
+
 function handlUserQuery(countries) {
     const arrayLength = [...countries].length;
 
-    if (arrayLength >= 2 && arrayLength <= 10) {
-        renderCountriesList(countries);
-    };
-
-    if (arrayLength === 1) {
-      
-        renderCountryMarkUP(countries);
-    };
-
     if (arrayLength > 10) {
         console.log('>10 countres');
-    };
-            
-            
+        renderNotify();
+    }
+
+    if (arrayLength >= 2 && arrayLength <= 10) {
+        renderCountriesList(countries);
+    }
+
+    if (arrayLength === 1) {
+        renderCountryMarkUP(countries);
+    }      
+}
+
+function renderNotify() {
+    defaultModules.set(PNotifyMobile, {});
+
+    alert({
+    text: 'Too many matches found. Please enter a more specific query!'
+    });
 }
 
 function renderCountriesList(countries) {
     const markUp = countriesList(countries);
     refs.getCountriesList.innerHTML = markUp;
 
-    //===============
     console.log('2-10 countre');
-
-    countries.map(countre => {
-        console.log(countre.name);
-        
-    });
-};
+}
 
 function renderCountryMarkUP(countries) {
     const markUp = countre(countries);
     refs.getCountriesList.innerHTML = markUp;
 
-    
-
-    //=========
     console.log('one country');
-    
+}
+
+function onFetchQuery(error) {
+    alert('Sorry, something went wrong! 0_0');
 }
 
 
@@ -95,6 +103,13 @@ function renderCountryMarkUP(countries) {
 //   }, 300)
 // }
 // aaaa();
+
+
+
+    // countries.map(countre => {
+    //     console.log(countre.name);
+        
+    // });
 
 
 

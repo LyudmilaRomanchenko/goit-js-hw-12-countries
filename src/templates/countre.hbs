@@ -1,4 +1,21 @@
-<p>РРРРРРРРРРРР</p>
 {{#each this}}
     <h1>{{name}}</h1>
+    <div class="country-card">
+        <div class="counrty-discription">
+            <ul class="counrty-discription-list">
+                <li>Capital: {{capital}}</li>
+                <li>Population: {{population}}</li>
+                <li>Languages:
+                    <ul>
+                        {{#each languages}}
+                        <li>{{this.name}}</li>
+                        {{/each}}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="country-image">
+            <img class="image" src="{{flag}}" alt="{{name}}">
+        </div>
+    </div>
 {{/each}}
