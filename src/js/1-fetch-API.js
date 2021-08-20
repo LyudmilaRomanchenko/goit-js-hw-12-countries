@@ -20,15 +20,12 @@ const refs = {
     getInput: document.querySelector('.input'),
     getCountriesList: document.querySelector('.countries-list'),
 }
-
 console.log(refs.getInput);
 
 refs.getInput.addEventListener('input',  debounce(onInput, 500));
 
 function onInput(event) {
     event.preventDefault();
-
-    console.log('hhhhhhhhhh');
 
     const searchQuery = refs.getInput.value;
     console.log(searchQuery);
