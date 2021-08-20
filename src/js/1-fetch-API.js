@@ -47,6 +47,7 @@ function handlUserQuery(countries) {
 
     if (arrayLength > 10) {
         console.log('>10 countres');
+        //refs.getCountriesList.text('ffff');
         renderNotify();
     }
 
